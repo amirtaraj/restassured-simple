@@ -11,35 +11,24 @@ import static org.junit.Assert.assertEquals;
 
 
 public class BaseSteps {
-    private String apiEndpoint;
-    private int responseCode;
-
-    @Given("I have the API endpoint for {string}")
-    public void setApiEndpoint(String operation) {
+    @Given("I have set the base URL")
+    public void setBaseUrl() {
         String baseUrl = ConfigUtils.getBaseUrl();
-        apiEndpoint = baseUrl + operation;
+        RestUtils.setBaseUrl(baseUrl);
     }
 
-    @When("I send a {string} request to the API")
-    public void sendRequest(String operation) {
-        switch (operation) {
-            case "post":
-                responseCode = RestUtils.postRequest(apiEndpoint, "{}").getStatusCode();
-                break;
-            case "put":
-                responseCode = RestUtils.putRequest(apiEndpoint, "{}").getStatusCode();
-                break;
-            case "get":
-                responseCode = RestUtils.getRequest(apiEndpoint).getStatusCode();
-                break;
-            case "delete":
-                responseCode = RestUtils.deleteRequest(apiEndpoint).getStatusCode();
-                break;
-        }
+    @Given("I have set the content type to {string}")
+    public void setContentType(String contentType) {
+        RestUtils.setContentType(contentType);
     }
 
-    @Then("I should receive a {int} response")
-    public void validateResponseCode(int expectedResponseCode) {
-        Assert.assertEquals(expectedResponseCode, responseCode);
+    @When("I perform a POST request to {string} with payload {string}")
+    public void performPostRequest(String endpoint, String payload) {
+        RestUtils.performPostRequest(endpoint, payload);
+    }
+
+    @Then("I should receive a response with status code {int}")
+    public void checkStatusCode(int expectedStatusCode) {
+        assertEquals(expectedStatusCode, RestUtils.response.getStatusCode());
     }
 }

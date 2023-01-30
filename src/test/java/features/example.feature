@@ -1,13 +1,7 @@
-Feature: API Test Example
+Feature: Example Feature
 
-  Scenario Outline: Test API for various operations
-    Given I have the API endpoint for <operation>
-    When I send a <operation> request to the API
-    Then I should receive a <response_code> response
-
-    Examples:
-      | operation | response_code |
-      | "post"    | 201           |
-      | "put"     | 200           |
-      | "get"     | 200           |
-      | "delete"  | 204           |
+  Scenario: Example Scenario
+    Given I have set the base URL
+    And I have set the content type to "application/json"
+    When I perform a POST request to "/api/users" with payload "{\"name\": \"morpheus\",\"job\": \"leader\"}"
+    Then I should receive a response with status code 201
