@@ -1,6 +1,6 @@
 Feature: Example Feature
 
-  Scenario: Example Scenario
+  Scenario: Example Post Scenario
     Given I have set the "base_url"
     Given I have set the path "users"
     And I have set the content type to "application"
