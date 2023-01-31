@@ -1,5 +1,6 @@
 Feature: Post Request Feature
 
+  @smoke
   Scenario: Example Post Scenario
     Given I have set the "base_url"
     And I have set the path "users"

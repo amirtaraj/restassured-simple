@@ -1,5 +1,6 @@
 Feature: Put Request Feature
 
+  @smoke
   Scenario: Example Put Scenario
     Given I have set the "base_url"
     And I have set the content type to "application"

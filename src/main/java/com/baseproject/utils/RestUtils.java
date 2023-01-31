@@ -61,7 +61,7 @@ public class RestUtils {
 
     public static Response performPutRequest(String payload) throws IOException {
         JsonObject bodyPayload = new RestUtils().readJsonFile(payload);
-        response = requestSpecification.when().body(bodyPayload).put(RestAssured.basePath).then().extract().response();
+        response = requestSpecification.when().body(bodyPayload.toString()).put(RestAssured.basePath).then().extract().response();
         response.then().log().all();
         LOGGER.info("Put URL: {}", RestAssured.baseURI + RestAssured.basePath);
         LOGGER.info("Received response status code: {}", response.getStatusCode());

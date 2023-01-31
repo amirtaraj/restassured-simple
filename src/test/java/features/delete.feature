@@ -1,5 +1,6 @@
 Feature: Delete Request Feature
 
+  @smoke
   Scenario: Example Delete Scenario
     Given I have set the "base_url"
     And I have set the content type to "application"

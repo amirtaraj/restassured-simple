@@ -1,5 +1,6 @@
 Feature: Get Request Feature
 
+  @smoke
   Scenario: Example Get Scenario
     Given I have set the "base_url"
     And I have set the content type to "application"
