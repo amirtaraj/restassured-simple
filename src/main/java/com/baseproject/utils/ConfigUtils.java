@@ -18,4 +18,8 @@ public class ConfigUtils {
     public static String getBaseUrl() {
         return configProperties.getProperty("base_url");
     }
+
+    public static String getProperties(String keyName) {
+        return configProperties.getProperty(keyName);
+    }
 }

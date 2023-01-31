@@ -20,20 +20,25 @@ public class RestUtils {
     public static void setBaseUrl(String baseUrl) {
         RestAssured.baseURI = baseUrl;
         requestSpecification = RestAssured.given();
+        LOGGER.info("Sending POST request to endpoint: {}", RestAssured.baseURI);
+    }
+
+    public static void setBasePath(String basePath) {
+        RestAssured.basePath = basePath;
+        requestSpecification = RestAssured.given();
+        LOGGER.info("Sending POST request to endpoint: {}", RestAssured.basePath);
     }
 
     public static void setContentType(String contentType) {
         requestSpecification.contentType(contentType);
     }
 
-    public static Response performPostRequest(String endpoint, String payload) {
+    public static Response performPostRequest(String payload) {
 		RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
-        requestSpecification.basePath(endpoint);
         requestSpecification.body(payload);
-        LOGGER.info("Sending POST request to endpoint: {}", endpoint);
         LOGGER.info("Payload: {}", payload);
-        response = requestSpecification.post(endpoint);
-        LOGGER.info("Post URL: {}", RestAssured.baseURI + endpoint);
+        response = requestSpecification.post(RestAssured.basePath);
+        LOGGER.info("Post URL: {}", RestAssured.baseURI + RestAssured.basePath);
 		LOGGER.info("Received response status code: {}", response.getStatusCode());
 		return response;
     }
