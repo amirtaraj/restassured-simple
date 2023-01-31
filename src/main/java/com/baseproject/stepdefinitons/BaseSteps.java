@@ -8,6 +8,8 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import org.junit.Assert;
 
+import java.io.IOException;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -36,7 +38,7 @@ public class BaseSteps {
     }
 
     @When("I perform a POST request to with payload {string}")
-    public void performPostRequest(String payload) {
+    public void performPostRequest(String payload) throws IOException {
         RestUtils.performPostRequest(payload);
     }
 
