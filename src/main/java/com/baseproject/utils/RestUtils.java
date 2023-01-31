@@ -1,6 +1,5 @@
 package com.baseproject.utils;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -14,6 +13,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileReader;
 import java.io.IOException;
+
+import static io.restassured.RestAssured.given;
 
 public class RestUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestUtils.class);
@@ -32,14 +33,14 @@ public class RestUtils {
 
     public static void setBaseUrl(String baseUrl) {
         RestAssured.baseURI = baseUrl;
-        requestSpecification = RestAssured.given();
-        LOGGER.info("Sending POST request to endpoint: {}", RestAssured.baseURI);
+        requestSpecification = given();
+        LOGGER.info("Sending request to endpoint: {}", RestAssured.baseURI);
     }
 
     public static void setBasePath(String basePath) {
         RestAssured.basePath = basePath;
-        requestSpecification = RestAssured.given();
-        LOGGER.info("Sending POST request to endpoint: {}", RestAssured.basePath);
+        requestSpecification = given();
+        LOGGER.info("Sending request to endpoint: {}", RestAssured.basePath);
     }
 
     public static void setContentType(String contentType) {
@@ -47,7 +48,7 @@ public class RestUtils {
     }
 
 
-    public static Response performPostRequest(String payload)  throws IOException{
+    public static Response performPostRequest(String payload) throws IOException {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         JsonObject bodyPayload = new RestUtils().readJsonFile(payload);
         requestSpecification.body(bodyPayload.toString());
@@ -57,4 +58,31 @@ public class RestUtils {
         LOGGER.info("Received response status code: {}", response.getStatusCode());
         return response;
     }
+
+    public static Response performPutRequest(String payload) throws IOException {
+        JsonObject bodyPayload = new RestUtils().readJsonFile(payload);
+        response = requestSpecification.when().body(bodyPayload).put(RestAssured.basePath).then().extract().response();
+        response.then().log().all();
+        LOGGER.info("Put URL: {}", RestAssured.baseURI + RestAssured.basePath);
+        LOGGER.info("Received response status code: {}", response.getStatusCode());
+        return response;
+    }
+
+    public static Response performDeleteRequest() {
+        response = requestSpecification.when().delete(RestAssured.basePath).then().extract().response();
+        response.then().log().all();
+        LOGGER.info("Delete URL: {}", RestAssured.baseURI + RestAssured.basePath);
+        LOGGER.info("Received response status code: {}", response.getStatusCode());
+        return response;
+    }
+
+    public static Response performGetRequest() {
+        response = requestSpecification.when().get(RestAssured.baseURI + RestAssured.basePath);
+        response.then().log().all();
+        LOGGER.info("Get URL: {}", RestAssured.baseURI + RestAssured.basePath);
+        LOGGER.info("Received response status code: {}", response.getStatusCode());
+        return response;
+    }
+
+
 }

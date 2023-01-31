@@ -4,11 +4,6 @@ import com.baseproject.utils.ConfigUtils;
 import com.baseproject.utils.RestUtils;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import io.restassured.RestAssured;
-import org.junit.Assert;
-
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -26,6 +21,13 @@ public class BaseSteps {
         RestUtils.setBasePath(basePath);
     }
 
+    @Given("I have set the path {string} with param {string}")
+    public void setBasePathWithParam(String base_path, String param) {
+        String path = ConfigUtils.getProperties(base_path + "_path");
+        String basePath = path + "/" + param;
+        RestUtils.setBasePath(basePath);
+    }
+
     @Given("I have set the content type to {string}")
     public void setContentType(String content_type) {
         String contentType;
@@ -35,11 +37,6 @@ public class BaseSteps {
             contentType = ConfigUtils.getProperties(content_type);
         }
         RestUtils.setContentType(contentType);
-    }
-
-    @When("I perform a POST request to with payload {string}")
-    public void performPostRequest(String payload) throws IOException {
-        RestUtils.performPostRequest(payload);
     }
 
     @Then("I should receive a response with status code {int}")
