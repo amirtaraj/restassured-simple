@@ -38,6 +38,7 @@ public class RestUtils {
         requestSpecification.body(payload);
         LOGGER.info("Payload: {}", payload);
         response = requestSpecification.post(RestAssured.basePath);
+        response.then().log().all();
         LOGGER.info("Post URL: {}", RestAssured.baseURI + RestAssured.basePath);
 		LOGGER.info("Received response status code: {}", response.getStatusCode());
 		return response;
