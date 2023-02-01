@@ -8,6 +8,7 @@ Bu proje Rest Assured With Cucumber API Test Otomasyonu Projesi test otomasyonu 
 * **Java/Javascript** - Development Language
 * **IntelliJ IDE** - Development IDE
 * **Maven** - Package Management
+* **Cucumber** - Gherkin Syntax Framework
 
 
 
