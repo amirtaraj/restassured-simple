@@ -1,29 +1,8 @@
-# Rest Assured With Cucumber API Test Otomasyonu Projesi
+Original Repo
+https://github.com/gokcesahinnn/rest-assured-cucumber-java-base-project
 
-Bu proje Rest Assured With Cucumber API Test Otomasyonu Projesi test otomasyonu base projesidir.
+- added reporting
 
-# Tool stack
-
-* **Rest Assured Framework** - Development Framework
-* **Java/Javascript** - Development Language
-* **IntelliJ IDE** - Development IDE
-* **Maven** - Package Management
-* **Cucumber** - Gherkin Syntax Framework
-
-
-
-# Project tree
-
-```
-.
-|-- src
-|   |-- main
-|   |   |-- java
-|   |   |   |-- utils
-|   |   |   |   |-- RestUtils.java
-|   |   |   |-- StepDefinitions.java
-|   |-- test
-|   |   |-- resources
-|   |   |   |-- features
-|   |   |   |   |-- api_test.feature
-```
+To run individual file -
+1. src/test/java/feature - Run individual feature
+2. src/com.baseproject/testrunner - Run all features 
